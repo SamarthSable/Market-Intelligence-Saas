@@ -29,7 +29,7 @@ async function bootstrap() {
 
     if (shouldAutoSyncOnStart) {
       // We run this in the background so the API can start serving immediately.
-      void runDataPipeline("live").catch((error) => {
+      void runDataPipeline(schedulerMode).catch((error) => {
         console.error("Startup live sync failed:", error.message);
       });
     }

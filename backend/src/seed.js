@@ -5,6 +5,13 @@ const prisma = new PrismaClient();
 
 // The seed keeps a small starter universe in place so the app has something real to work with on day one.
 const SECTORS = ["IT", "Banking", "Pharma", "Energy", "FMCG"];
+const INDICATORS = [
+  {
+    id: 1,
+    name: "RSI",
+    formula: "RSI(14)",
+  },
+];
 
 // We store api_symbol here too so the live sync can fetch prices without any manual DB patching later.
 const COMPANIES = [
@@ -57,6 +64,23 @@ async function main() {
   }
 
   console.log("Sectors inserted or updated");
+
+  for (const indicator of INDICATORS) {
+    await prisma.indicators.upsert({
+      where: { id: indicator.id },
+      update: {
+        name: indicator.name,
+        formula: indicator.formula,
+      },
+      create: {
+        id: indicator.id,
+        name: indicator.name,
+        formula: indicator.formula,
+      },
+    });
+  }
+
+  console.log("Indicators inserted or updated");
 
   const sectors = await prisma.sectors.findMany({
     select: {

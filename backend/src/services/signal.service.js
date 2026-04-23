@@ -1,6 +1,8 @@
 import { prisma } from "../prisma.js";
+import { ensureRsiIndicator } from "./indicator.service.js";
 
 export async function generateSignals() {
+  const rsiIndicator = await ensureRsiIndicator();
   const companies = await prisma.companies.findMany();
 
   for (const company of companies) {
@@ -10,7 +12,7 @@ export async function generateSignals() {
     });
 
     const rsi = await prisma.technical_indicators.findFirst({
-      where: { company_id: company.id, indicator_id: 1 },
+      where: { company_id: company.id, indicator_id: rsiIndicator.id },
       orderBy: { trade_date: "desc" },
     });
 

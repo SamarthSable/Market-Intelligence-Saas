@@ -1,5 +1,10 @@
 import { prisma } from "../prisma.js";
 
+const RSI_INDICATOR = {
+  name: "RSI",
+  formula: "RSI(14)",
+};
+
 function SMA(prices, period) {
   if (prices.length < period) return null;
   const slice = prices.slice(-period);
@@ -24,7 +29,24 @@ function RSI(prices, period = 14) {
   return 100 - 100 / (1 + rs);
 }
 
+export async function ensureRsiIndicator() {
+  return prisma.indicators.upsert({
+    where: {
+      id: 1,
+    },
+    update: {
+      name: RSI_INDICATOR.name,
+      formula: RSI_INDICATOR.formula,
+    },
+    create: {
+      name: RSI_INDICATOR.name,
+      formula: RSI_INDICATOR.formula,
+    },
+  });
+}
+
 export async function calculateIndicators() {
+  const rsiIndicator = await ensureRsiIndicator();
   const companies = await prisma.companies.findMany();
 
   for (const company of companies) {
@@ -48,7 +70,7 @@ export async function calculateIndicators() {
         company_id_trade_date_indicator_id: {
           company_id: company.id,
           trade_date: latest,
-          indicator_id: 1,
+          indicator_id: rsiIndicator.id,
         },
       },
       update: {
@@ -57,7 +79,7 @@ export async function calculateIndicators() {
       create: {
         company_id: company.id,
         trade_date: latest,
-        indicator_id: 1,
+        indicator_id: rsiIndicator.id,
         value: rsi,
       },
     });
