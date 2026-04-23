@@ -1,0 +1,73 @@
+.sectors-page .sector-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.sectors-page .sector-detail-card {
+    padding: 20px;
+    border-radius: 22px;
+    background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.1), transparent 38%),
+        linear-gradient(180deg, rgba(18, 30, 54, 0.9), rgba(9, 17, 31, 0.9));
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    box-shadow: 0 20px 34px rgba(2, 6, 23, 0.26);
+}
+
+.sectors-page .sector-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.sectors-page .sector-rank,
+.opportunities-page .opportunity-rank,
+.opportunities-page .opportunity-score {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.sectors-page .sector-direction {
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sectors-page .sector-direction.is-up,
+.sectors-page .sector-return.is-up {
+    color: #4ade80;
+}
+
+.sectors-page .sector-direction.is-down,
+.sectors-page .sector-return.is-down {
+    color: #f87171;
+}
+
+.sectors-page .sector-detail-card h3 {
+    margin: 0 0 10px;
+    color: #f8fafc;
+    font-size: 1.12rem;
+}
+
+.sectors-page .sector-return {
+    display: block;
+    font-size: 1.55rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.sectors-page .sector-detail-card p {
+    margin: 0;
+    color: #94a3b8;
+}

@@ -1,0 +1,183 @@
+/* Page */
+.signals-page {
+    max-width: 1100px;
+    margin: 40px auto;
+    color: var(--app-text);
+}
+
+/* Headings */
+.signals-page h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.signals-page p,
+.signals-page .signals-intro {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.signals-page .signals-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.signals-page .signals-summary-card {
+    padding: 18px 20px;
+    border-radius: 20px;
+    background: var(--surface-2);
+    border: 1px solid var(--surface-border);
+}
+
+/* Table */
+.signals-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: var(--surface-4);
+    backdrop-filter: blur(16px);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-panel);
+}
+
+/* Header */
+.signals-table thead {
+    background: var(--surface-5);
+}
+
+.signals-table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Rows */
+.signals-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--surface-border-soft);
+}
+
+.signals-table tbody tr:hover {
+    background: var(--surface-5);
+}
+
+/* Company */
+.signals-page .company-name {
+    font-weight: 600;
+    color: var(--text-strong);
+}
+
+.signals-page .signal-company-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.signals-page .signal-company-block strong {
+    color: var(--text-strong);
+}
+
+.signals-page .signal-company-block span {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+/* Signal badge */
+.signals-page .signal-badge {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 12px;
+    display: inline-block;
+    min-width: 70px;
+    text-align: center;
+}
+
+.signals-page .signal-badge.BUY {
+    background: var(--accent-positive-bg);
+    color: var(--accent-positive);
+}
+
+.signals-page .signal-badge.SELL {
+    background: var(--accent-negative-bg);
+    color: var(--accent-negative);
+}
+
+.signals-page .signal-badge.HOLD {
+    background: var(--accent-warning-bg);
+    color: var(--accent-warning);
+}
+
+/* Confidence */
+.signals-page .confidence {
+    font-weight: 600;
+}
+
+.signals-page .confidence-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.signals-page .confidence-bar {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--surface-subtle);
+}
+
+.signals-page .confidence-bar-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: var(--button-primary);
+}
+
+/* Date */
+.signals-page .signal-date {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+@media (max-width: 760px) {
+    .signals-page {
+        margin: 24px auto;
+        padding: 0 14px 24px;
+    }
+
+    .signals-page .signals-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .signals-table,
+    .signals-table thead,
+    .signals-table tbody,
+    .signals-table tr,
+    .signals-table th,
+    .signals-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .signals-table thead {
+        display: none;
+    }
+
+    .signals-table tr {
+        padding: 12px;
+        border-bottom: 1px solid var(--surface-border-soft);
+    }
+
+    .signals-table td {
+        padding: 8px 4px;
+        border-bottom: none;
+    }
+}

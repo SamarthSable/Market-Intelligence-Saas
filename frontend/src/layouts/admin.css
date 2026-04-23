@@ -1,0 +1,342 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+.admin-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 4px 0 32px;
+    color: var(--app-text);
+}
+
+.admin-hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: end;
+    margin-bottom: 24px;
+}
+
+.admin-kicker,
+.admin-section-label {
+    margin: 0 0 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: var(--accent);
+}
+
+.admin-hero h2,
+.admin-card h3 {
+    margin: 0;
+    color: var(--text-strong);
+}
+
+.admin-subtitle {
+    max-width: 760px;
+    margin: 10px 0 0;
+    color: var(--text-muted);
+}
+
+.admin-hero-badge {
+    min-width: 240px;
+    padding: 18px;
+    border-radius: 22px;
+    background: var(--surface-3);
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--shadow-soft);
+}
+
+.admin-hero-badge .badge-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
+.admin-hero-badge strong {
+    display: block;
+    font-size: 1.25rem;
+    color: var(--text-strong);
+    margin-bottom: 6px;
+}
+
+.admin-hero-badge small,
+.admin-message,
+.admin-inline-meta,
+.admin-user-meta span,
+.admin-report-text {
+    color: var(--text-muted);
+}
+
+.admin-stat-grid,
+.admin-grid,
+.admin-feature-grid,
+.admin-user-grid,
+.admin-report-grid {
+    display: grid;
+    gap: 18px;
+}
+
+.admin-stat-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 24px;
+}
+
+.admin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-user-grid,
+.admin-report-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-card,
+.admin-stat-card {
+    border-radius: 24px;
+    background: var(--surface-2);
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--shadow-strong);
+}
+
+.admin-card {
+    padding: 22px;
+}
+
+.admin-activity-card {
+    margin-bottom: 18px;
+}
+
+.admin-stat-card {
+    padding: 20px;
+}
+
+.admin-card-feature {
+    background:
+        radial-gradient(circle at top right, var(--accent-soft), transparent 35%),
+        var(--surface-2);
+}
+
+.admin-card-head,
+.admin-list-row,
+.admin-action-row,
+.admin-toolbar {
+    display: flex;
+    align-items: center;
+}
+
+.admin-card-head,
+.admin-list-row,
+.admin-toolbar {
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.admin-card-head {
+    margin-bottom: 18px;
+}
+
+.admin-stat-icon,
+.admin-card-icon {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.admin-stat-title,
+.admin-feature-block span,
+.admin-field span {
+    color: var(--text-muted);
+}
+
+.admin-stat-value,
+.admin-feature-block strong {
+    display: block;
+    margin: 10px 0 6px;
+    font-size: 2rem;
+    color: var(--text-strong);
+}
+
+.admin-feature-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.admin-feature-block,
+.admin-list-row {
+    padding: 16px;
+    border-radius: 18px;
+    background: var(--surface-1);
+    border: 1px solid var(--surface-border-soft);
+}
+
+.admin-list {
+    display: grid;
+    gap: 12px;
+}
+
+.admin-list-row strong,
+.admin-report-text,
+.admin-card h3 {
+    color: var(--text-strong);
+}
+
+.admin-list-meta,
+.admin-user-meta {
+    display: grid;
+    gap: 6px;
+}
+
+.admin-list-meta {
+    text-align: right;
+}
+
+.admin-activity-row {
+    align-items: flex-start;
+}
+
+.admin-activity-copy {
+    display: grid;
+    gap: 8px;
+}
+
+.admin-toolbar {
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.admin-filter-group,
+.admin-action-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.admin-filter-btn,
+.admin-btn {
+    border: none;
+    cursor: pointer;
+    border-radius: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.admin-filter-btn {
+    padding: 10px 14px;
+    background: var(--surface-subtle);
+    color: var(--text-soft);
+}
+
+.admin-filter-btn.is-active {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.admin-btn {
+    padding: 12px 16px;
+}
+
+.admin-btn-secondary {
+    background: var(--surface-subtle);
+    color: var(--app-text);
+}
+
+.admin-btn-success {
+    background: var(--accent-positive-bg);
+    color: var(--accent-positive);
+}
+
+.admin-btn-danger {
+    background: var(--accent-negative-bg);
+    color: var(--accent-negative);
+}
+
+.admin-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.admin-badge-approved {
+    background: var(--accent-positive-bg);
+    color: var(--accent-positive);
+}
+
+.admin-badge-pending {
+    background: var(--accent-warning-bg);
+    color: var(--accent-warning);
+}
+
+.admin-badge-rejected {
+    background: var(--accent-negative-bg);
+    color: var(--accent-negative);
+}
+
+.admin-field {
+    display: grid;
+    gap: 8px;
+}
+
+.admin-field select {
+    width: 100%;
+    border: 1px solid var(--surface-border);
+    background: var(--surface-6);
+    color: var(--text-strong);
+    border-radius: 16px;
+    padding: 14px 16px;
+    outline: none;
+}
+
+.admin-report-text {
+    line-height: 1.7;
+    margin: 0 0 16px;
+}
+
+.admin-inline-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+}
+
+@media (max-width: 1100px) {
+    .admin-stat-grid,
+    .admin-grid,
+    .admin-feature-grid,
+    .admin-user-grid,
+    .admin-report-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .admin-hero,
+    .admin-card-head,
+    .admin-list-row,
+    .admin-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-list-meta {
+        text-align: left;
+    }
+
+    .admin-inline-meta {
+        margin-left: 0;
+    }
+}

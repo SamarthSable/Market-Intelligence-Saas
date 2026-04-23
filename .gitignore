@@ -1,0 +1,17 @@
+# Top-level ignores for a single Git repo that contains both apps
+backend/node_modules/
+frontend/node_modules/
+
+# Local env files
+backend/.env
+frontend/.env
+
+# Build output
+frontend/dist/
+backend/src/generated/prisma/
+
+# Logs and editor clutter
+*.log
+.DS_Store
+.idea/
+.vscode/

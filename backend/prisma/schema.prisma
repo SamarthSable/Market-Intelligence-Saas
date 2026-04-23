@@ -1,0 +1,151 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model companies {
+  id                   Int                    @id @default(autoincrement())
+  name                 String                 @db.VarChar(150)
+  symbol               String                 @unique(map: "symbol") @db.VarChar(20)
+  sector_id            Int?
+  market_cap           BigInt?
+  api_symbol           String?                @db.VarChar(50)
+  sectors              sectors?               @relation(fields: [sector_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "companies_ibfk_1")
+  financials           financials[]
+  price_data           price_data[]
+  technical_indicators technical_indicators[]
+
+  @@index([sector_id], map: "sector_id")
+}
+
+model financials {
+  id          Int                 @id @default(autoincrement())
+  company_id  Int
+  fiscal_year Int?                @db.Year
+  quarter     financials_quarter?
+  revenue     Decimal?            @db.Decimal(15, 2)
+  profit      Decimal?            @db.Decimal(15, 2)
+  eps         Decimal?            @db.Decimal(10, 2)
+  debt        Decimal?            @db.Decimal(15, 2)
+  assets      Decimal?            @db.Decimal(15, 2)
+  liabilities Decimal?            @db.Decimal(15, 2)
+  companies   companies           @relation(fields: [company_id], references: [id], onUpdate: Restrict, map: "financials_ibfk_1")
+
+  @@index([company_id], map: "company_id")
+}
+
+model indicators {
+  id                   Int                    @id @default(autoincrement())
+  name                 String                 @db.VarChar(100)
+  formula              String?                @db.Text
+  sector_id            Int?
+  created_by           Int?
+  sectors              sectors?               @relation(fields: [sector_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "indicators_ibfk_1")
+  users                users?                 @relation(fields: [created_by], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "indicators_ibfk_2")
+  technical_indicators technical_indicators[]
+
+  @@index([created_by], map: "created_by")
+  @@index([sector_id], map: "sector_id")
+}
+
+model price_data {
+  id          BigInt    @id @default(autoincrement())
+  company_id  Int
+  trade_date  DateTime  @db.Date
+  open_price  Decimal?  @db.Decimal(10, 2)
+  high_price  Decimal?  @db.Decimal(10, 2)
+  low_price   Decimal?  @db.Decimal(10, 2)
+  close_price Decimal?  @db.Decimal(10, 2)
+  volume      BigInt?
+  companies   companies @relation(fields: [company_id], references: [id], onUpdate: Restrict, map: "price_data_ibfk_1")
+
+  @@unique([company_id, trade_date], map: "company_date_unique")
+  @@index([company_id, trade_date], map: "idx_price_company_date")
+}
+
+model reports {
+  id           Int            @id @default(autoincrement())
+  title        String?        @db.VarChar(200)
+  summary      String?        @db.Text
+  sector_id    Int?
+  analyst_id   Int?
+  published_at DateTime       @default(now()) @db.Timestamp(0)
+  status       reports_status @default(pending)
+  sectors      sectors?       @relation(fields: [sector_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "reports_ibfk_1")
+  users        users?         @relation(fields: [analyst_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "reports_ibfk_2")
+
+  @@index([analyst_id], map: "analyst_id")
+  @@index([sector_id], map: "sector_id")
+}
+
+model sectors {
+  id         Int          @id @default(autoincrement())
+  name       String       @unique(map: "name") @db.VarChar(100)
+  companies  companies[]
+  indicators indicators[]
+  reports    reports[]
+}
+
+model technical_indicators {
+  id           BigInt      @id @default(autoincrement())
+  company_id   Int?
+  trade_date   DateTime?   @db.Date
+  indicator_id Int?
+  value        Decimal?    @db.Decimal(10, 4)
+  companies    companies?  @relation(fields: [company_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "technical_indicators_ibfk_1")
+  indicators   indicators? @relation(fields: [indicator_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "technical_indicators_ibfk_2")
+
+  @@unique([company_id, trade_date, indicator_id], map: "company_indicator_date")
+  @@index([indicator_id], map: "indicator_id")
+}
+
+model users {
+  id            Int          @id @default(autoincrement())
+  name          String       @db.VarChar(100)
+  email         String       @unique(map: "email") @db.VarChar(150)
+  password_hash String       @db.VarChar(255)
+  role          users_role
+  created_at    DateTime     @default(now()) @db.Timestamp(0)
+  indicators    indicators[]
+  reports       reports[]
+}
+
+model signals {
+  id          BigInt               @id @default(autoincrement())
+  company_id  Int?
+  trade_date  DateTime?            @db.Date
+  signal_type signals_signal_type?
+  confidence  Decimal?             @db.Decimal(5, 2)
+  created_at  DateTime             @default(now()) @db.Timestamp(0)
+
+  @@unique([company_id, trade_date], map: "company_date")
+}
+
+enum financials_quarter {
+  Q1
+  Q2
+  Q3
+  Q4
+}
+
+enum users_role {
+  admin
+  analyst
+  client
+}
+
+enum signals_signal_type {
+  BUY
+  SELL
+  HOLD
+}
+
+enum reports_status {
+  pending
+  approved
+  rejected
+}

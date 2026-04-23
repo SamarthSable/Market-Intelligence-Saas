@@ -1,0 +1,100 @@
+.portfolio-page .portfolio-summary-grid {
+    margin-bottom: 20px;
+}
+
+.portfolio-page .row {
+    display: flex;
+    align-items: center;
+    padding: 14px 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    transition: 0.25s ease;
+}
+
+.portfolio-page .row:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.portfolio-page .row.header {
+    font-weight: 600;
+    color: #94a3b8;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0;
+}
+
+.portfolio-company {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-company b {
+    font-size: 15px;
+    color: #f8fafc;
+}
+
+.portfolio-company span {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.portfolio-cell {
+    flex: 1;
+    font-size: 14px;
+}
+
+.price {
+    font-weight: 600;
+}
+
+.change.positive {
+    color: #22c55e;
+}
+
+.change.negative {
+    color: #ef4444;
+}
+
+.rsi {
+    color: #38bdf8;
+}
+
+.signal {
+    font-weight: 700;
+}
+
+.signal.BUY {
+    color: #22c55e;
+}
+
+.signal.SELL {
+    color: #ef4444;
+}
+
+.signal.HOLD {
+    color: #facc15;
+}
+
+.empty {
+    color: #94a3b8;
+    margin-top: 30px;
+}
+
+@media (max-width: 760px) {
+    .portfolio-page .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        align-items: start;
+    }
+
+    .portfolio-page .row.header {
+        display: none;
+    }
+
+    .portfolio-page .portfolio-summary-grid {
+        margin-bottom: 16px;
+    }
+}
