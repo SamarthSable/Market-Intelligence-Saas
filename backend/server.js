@@ -44,4 +44,9 @@ async function bootstrap() {
   });
 }
 
-await bootstrap();
+try {
+  await bootstrap();
+} catch (error) {
+  console.error("Fatal startup error:", error);
+  process.exit(1);
+}
