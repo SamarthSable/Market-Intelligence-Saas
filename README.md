@@ -9,7 +9,7 @@ Market Intelligence SaaS is a role-based stock research platform for Indian equi
 ## What the App Does
 
 - Gives `admin`, `analyst`, and `client` users separate workspaces with protected routes
-- Pulls market prices into MySQL and uses that data for dashboard cards, signals, portfolio views, and sector ranking
+- Pulls market prices into PostgreSQL and uses that data for dashboard cards, signals, portfolio views, and sector ranking
 - Lets analysts create, edit, and submit reports that admins can approve or reject
 - Lets clients browse approved reports, watchlists, signals, sectors, and portfolio-style market snapshots
 - Stores flexible platform activity in MongoDB for the admin activity feed
@@ -19,7 +19,7 @@ Market Intelligence SaaS is a role-based stock research platform for Indian equi
 
 - Frontend: React 19, Vite, React Router, Redux Toolkit, Bootstrap, ApexCharts
 - Backend: Node.js, Express, Prisma
-- Relational database: MySQL
+- Relational database: PostgreSQL (Neon-ready)
 - Document database: MongoDB
 - Market/news integrations: Yahoo Finance chart endpoint, GNews, RSS feeds
 
@@ -72,13 +72,13 @@ npm install
 Create `backend/.env` with:
 
 ```env
-DATABASE_URL=your_mysql_connection_string
+DATABASE_URL=your_neon_connection_string
 MONGO_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 GNEWS_API_KEY=your_gnews_key
 PORT=5000
 CLIENT_URL=http://localhost:5173
-AUTO_SYNC_ON_START=true
+AUTO_SYNC_ON_START=false
 AUTO_SYNC_SCHEDULE_ON_START=false
 SYNC_STARTUP_MODE=live
 SYNC_INTERVAL_MINUTES=60
@@ -96,9 +96,9 @@ VITE_API_BASE_URL=http://localhost:5000/api
 
 ```bash
 cd backend
-npx prisma generate
-npx prisma db push
-node src/seed.js
+npm run db:generate
+npm run db:push
+npm run db:seed
 ```
 
 ### 4. Start the app
@@ -119,7 +119,7 @@ npm run dev
 
 ## Data Sync Commands
 
-The backend can sync live market data into MySQL for `price_data`, indicators, and signals.
+The backend can sync live market data into PostgreSQL for `price_data`, indicators, and signals.
 
 ```bash
 cd backend
@@ -143,7 +143,29 @@ npm run sync:schedule
 
 - Replace the preview image with a real dashboard screenshot if you want the repository page to show the live UI
 - Do not commit real `.env` secrets
-- The current Prisma schema still targets MySQL. If you migrate to Neon later, you will need to switch Prisma to PostgreSQL first.
+
+## Render Deploy
+
+Backend service:
+
+- Root directory: `backend`
+- Build command: `npm run render-build`
+- Start command: `npm start`
+
+Required backend env vars:
+
+- `DATABASE_URL`
+- `MONGO_URL`
+- `JWT_SECRET`
+- `GNEWS_API_KEY`
+- `CLIENT_URL`
+
+Frontend service:
+
+- Root directory: `frontend`
+- Build command: `npm run build`
+- Output directory: `dist`
+- Env var: `VITE_API_BASE_URL=https://your-backend-url/api`
 
 ## License
 

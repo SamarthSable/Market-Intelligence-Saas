@@ -5,6 +5,7 @@ frontend/node_modules/
 # Local env files
 backend/.env
 frontend/.env
+frontend/.env.example
 
 # Build output
 frontend/dist/
